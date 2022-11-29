@@ -5,7 +5,11 @@ metadata:
 spec:
   ports:
   - port: 80
+    name: con1
     nodePort: 30123
+  - port: 8080
+    name: con2
+    nodePort: 30124
   selector:
     app: mypod
   type: NodePort

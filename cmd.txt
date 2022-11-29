@@ -1,3 +1,119 @@
     1  kubectl get nodes
     2  cd myapp/
     3  history > cmd.txt
+    4  ld
+    5  ls
+    6  git add .
+    7  vi kops.sh
+    8  sh kops.sh 
+    9  vi kops.sh 
+   10  sh kops.sh 
+   11  vi kops.sh 
+   12  mkdir myapp
+   13  cd myapp/
+   14  cp ../kops.sh .
+   15  git init 
+   16  git config --global 
+   17  git add
+   18  git add .
+   19  git commit -m "first commit"
+   20  git config --global --edit
+   21  git commit -m "first commit"
+   22  git branch -M main
+   23  git remote add origin git@github.com:aneeshansari/test.git
+   24  cat ../.ssh/id_rsa.pub 
+   25  git push -u origin main
+   26  ls
+   27  history 
+   28  cd myapp/
+   29  ls
+   30  vi pod.yaml 
+   31  vi svc.yaml 
+   32  kubectl get pod
+   33  kubectl delete pod mypod
+   34  kubectl get pod
+   35  ls
+   36  kubectl delete -f pod.yaml 
+   37  kubectl get svc
+   38  kubectl delete svc newpod-svc 
+   39  kubectl ls
+   40  ls
+   41  kubectl create -f pod.yaml -f svc.yaml 
+   42  ls
+   43  kubectl delete -f .
+   44  kubectl create -f .
+   45  kubectl delete -f .
+   46  kubectl get pod
+   47  vi pod.yaml 
+   48  kubectl create -f pod.yaml 
+   49  kubectl get pod
+   50  kubectl describe pod newpod
+   51  kubectl get pod
+   52  kubectl exec -it newpod -- bash
+   53  kubectl exec -it newpod -c con1 -- bash
+   54  kubectl exec -it newpod -c con2 -- bash
+   55  kubectl get pod
+   56  kubectl logs newpod -c con1
+   57  kubectl logs newpod -c con2
+   58  kubectl get pod
+   59  vi svc.yaml 
+   60  kubectl delete -f pod.yaml 
+   61  vi pod.yaml 
+   62  kubectl create -f pod.yaml 
+   63  kubectl get pod
+   64  kubectl get svc
+   65* kubectl 
+   66  vi pod.yaml 
+   67  kubectl delete svc newpod-svc 
+   68  kubectl expose pod newpod --type=NodePort --dry-run=client -o yaml
+   69  vi svc.yaml 
+   70  kubectl create -f svc.yaml 
+   71  vi svc.yaml 
+   72  kubectl create -f svc.yaml 
+   73  kubectl get svc
+   74  vi svc.yaml 
+   75  kubectl get pods
+   76  kubectl get nodes
+   77  kubectl get pods -o wide
+   78  kubectl delete -f .
+   79  cp pod.yaml nodename-pod.yaml
+   80  vi pod.yaml 
+   81  kubectl get pod
+   82  ls
+   83  kubectl get nodes
+   84  vi nodename-pod.yaml 
+   85  kubectl create -f nodename-pod.yaml 
+   86  kubectl get pod -o wide
+   87  vi nodename-pod.yaml 
+   88  kubectl delete -f nodename-pod.yaml 
+   89  vi nodename-pod.yaml 
+   90  kubectl create -f nodename-pod.yaml 
+   91  kubectl get pods -o wide
+   92  kubectl delete -f nodename-pod.yaml 
+   93  kubectl get pods -o wide
+   94  kubectl get nodes
+   95  vi nodename-pod.yaml 
+   96  kubectl get nodes --show-labels 
+   97  kubectl get nodes
+   98  kubectl label nodes ip-172-20-54-252.ap-south-1.compute.internal cpu=ryzen
+   99  kubectl get nodes --show-labels 
+  100  kubectl get nodes --show-labels  | grep cpu=ryzen
+  101  kubectl get nodes
+  102  cp nodename-pod.yaml node-selector-pod.yaml
+  103  vi node-selector-pod.yaml
+  104  kubectl create -f node-selector-pod.yaml 
+  105  kubectl get pod -o wide
+  106  kubectl get nodes --show-labels  | grep cpu=ryzen
+  107  kubectl delete -f node-selector-pod.yaml 
+  108  vi node-selector-pod.yaml
+  109  kubectl get nodes
+  110  kubectl label nodes ip-172-20-54-252.ap-south-1.compute.internal cpu-
+  111  kubectl get nodes --show-labels  | grep cpu=ryzen
+  112  kubectl create -f node-selector-pod.yaml 
+  113  kubectl get pod 
+  114  vi node-selector-pod.yaml 
+  115  kubectl get pod 
+  116  kubectl label nodes ip-172-20-54-252.ap-south-1.compute.internal cpu=ryzen
+  117  kubectl get pod 
+  118  kubectl get pod -o wide
+  119  history > cmd.txt 
