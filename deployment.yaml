@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydep
+spec:
+   replicas: 3
+   selector:
+     matchLabels:
+       app: myapp
+   template:
+     metadata:
+       labels:
+          app: myapp
+     spec:
+        containers:
+        - name: con1
+          image: nginx:latest
+          ports:
+          - containerPort: 80
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: mydep-hpa
+spec:
+  maxReplicas: 10
+  minReplicas: 3
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: mydep
+  targetCPUUtilizationPercentage: 70
