@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name:  node-aff-pref
+  labels:
+    app: mypod
+spec:
+  containers:
+  - image: nginx:latest
+    name: con1
+    ports:
+    - containerPort: 80
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:
+          - key: cpu
+            operator: NotIn   # change operator for anti affinity NotIn >> for affinity use operator In
+            values:
+            - ryzen       
