@@ -1,3 +1,21 @@
+# Taint nodes
+kubectl taint nodes ip-172-20-46-26.ap-south-1.compute.internal color=red
+
+#see taint in node
+kubectl describe nodes ip-172-20-46-26.ap-south-1.compute.internal | grep "Taint"
+
+root@ip-172-31-40-175:~/myapp# kubectl describe nodes ip-172-20-46-26.ap-south-1.compute.internal | grep "Taint"
+Taints:             color=red:NoExecute
+
+
+
+## Remove taint from node
+root@ip-172-31-40-175:~/myapp# kubectl taint nodes ip-172-20-46-26.ap-south-1.compute.internal color-
+node/ip-172-20-46-26.ap-south-1.compute.internal untainted
+
+
+
+
 
 replicationcontroller commands:
 ##create replication controller
@@ -9,5 +27,18 @@ kubectl get rc/replicationcontroller
 #scale in/out replicas of replicationcontroller
 kubectl scale replicationcontroller myrc --replicas=3
 
+#List pods  , -o wide option to see in which node pod is running
+kubectl get pod -o wide
 
+replicaSet commands:
+
+
+#list replicationcontroller
+kubectl get rc/replicationcontroller
+
+#scale in/out replicas of replicationcontroller
+kubectl scale replicationcontroller myrc --replicas=3
+
+#List pods  , -o wide option to see in which node pod is running
+kubectl get pod -o wide
 

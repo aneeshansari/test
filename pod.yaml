@@ -4,6 +4,7 @@ metadata:
   name: newpod
   labels:
     app: myapp
+    env: dev
 spec:
   containers:
   - image: nginx:latest
