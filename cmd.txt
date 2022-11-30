@@ -117,3 +117,285 @@
   117  kubectl get pod 
   118  kubectl get pod -o wide
   119  history > cmd.txt 
+    1  kubectl get nodes
+    2  cd myapp/
+    3  history > cmd.txt
+    4  ld
+    5  ls
+    6  git add .
+    7  vi kops.sh
+    8  sh kops.sh 
+    9  vi kops.sh 
+   10  sh kops.sh 
+   11  vi kops.sh 
+   12  mkdir myapp
+   13  cd myapp/
+   14  cp ../kops.sh .
+   15  git init 
+   16  git config --global 
+   17  git add
+   18  git add .
+   19  git commit -m "first commit"
+   20  git config --global --edit
+   21  git commit -m "first commit"
+   22  git branch -M main
+   23  git remote add origin git@github.com:aneeshansari/test.git
+   24  cat ../.ssh/id_rsa.pub 
+   25  git push -u origin main
+   26  ls
+   27  kops get clusters
+   28  kubectl get nodes
+   29  ls
+   30  cd myapp/
+   31  ls
+   32  kubectl get nodes
+   33  kubectl run mypod --image nginx:latest --port 80
+   34  kubectl get pod
+   35  kubectl describe pod mypod
+   36  kubectl get pod
+   37  kubectl describe pod mypod
+   38  kubectl get pod
+   39  kubectl exec -it mypod -- bash
+   40  kubectl exec -it mypod -- cat /etc/hosts
+   41  kubectl exec -it mypod -- cat /etc/hosts > hosts
+   42  ks
+   43  ls
+   44  rm hosts 
+   45  ls
+   46  kubectl run mypod --image nginx:latest --port 80 --dry-run=client -o yaml
+   47  kubectl run mypod --image nginx:latest --port 80 --dry-run=client -o yaml > pod.yaml
+   48  vi pod.yaml 
+   49  vi ../.bashrc 
+   50  source ../.bashrc 
+   51  vi ../.bashrc 
+   52  source ../.bashrc 
+   53  kubectl create -f pod.yaml 
+   54  kubectl get pod
+   55  vi pod.yaml 
+   56  kubectl create -f pod.yaml 
+   57  kubectl get pod 
+   58  kubectl expose --help
+   59  kubectl expose pod newpod --type=NodePort --port 80 --dry-run=client -o yaml
+   60  vi svc.yaml
+   61  vi pod.yaml 
+   62  vi svc.yaml
+   63  kubectl create -f svc.yaml 
+   64  kubectl get service
+   65  kubectl get svc
+   66  kubectl delete -f svc.yaml 
+   67  vi svc.yaml 
+   68  kubectl create -f svc.yaml 
+   69  kubectl get svc
+   70  kubectl get pod
+   71  kubectl get pod --show-labels 
+   72  kubectl get pod -o wide
+   73  kubectl describe svc newpod-svc 
+   74  cd myapp/
+   75  git add .
+   76  git commit -m "pod"
+   77  git push origin mail
+   78  git push origin main
+   79  cd ..
+   80  aws s3 cp myapp newyaml2022
+   81  aws s3 cp myapp s3://newyaml2022
+   82  #aws s3 cp * s3://newyaml2022
+   83  cd myapp/
+   84  aws s3 cp * s3://newyaml2022
+   85  aws s3 cp /roo/myapp s3://newyaml2022 –recursive
+   86  aws s3 cp /roo/myapp s3://newyaml2022 --recursive
+   87  aws s3 cp /root/myapp s3://newyaml2022 --recursive
+   88  ls
+   89  aws s3 ls
+   90  ls
+   91  history 
+   92  # aws s3 cp /root/myapp s3://newyaml2022 --recursive
+   93  aws s3 cp /root/myapp s3://newyaml2022/myapp --recursive
+   94  history 
+   95  cd myapp/
+   96  ls
+   97  vi pod.yaml 
+   98  vi svc.yaml 
+   99  kubectl get pod
+  100  kubectl delete pod mypod
+  101  kubectl get pod
+  102  ls
+  103  kubectl delete -f pod.yaml 
+  104  kubectl get svc
+  105  kubectl delete svc newpod-svc 
+  106  kubectl ls
+  107  ls
+  108  kubectl create -f pod.yaml -f svc.yaml 
+  109  ls
+  110  kubectl delete -f .
+  111  kubectl create -f .
+  112  kubectl delete -f .
+  113  kubectl get pod
+  114  vi pod.yaml 
+  115  kubectl create -f pod.yaml 
+  116  kubectl get pod
+  117  kubectl describe pod newpod
+  118  kubectl get pod
+  119  kubectl exec -it newpod -- bash
+  120  kubectl exec -it newpod -c con1 -- bash
+  121  kubectl exec -it newpod -c con2 -- bash
+  122  kubectl get pod
+  123  kubectl logs newpod -c con1
+  124  kubectl logs newpod -c con2
+  125  kubectl get pod
+  126  vi svc.yaml 
+  127  kubectl delete -f pod.yaml 
+  128  vi pod.yaml 
+  129  kubectl create -f pod.yaml 
+  130  kubectl get pod
+  131  kubectl get svc
+  132  kubectl 
+  133  vi pod.yaml 
+  134  kubectl delete svc newpod-svc 
+  135  kubectl expose pod newpod --type=NodePort --dry-run=client -o yaml
+  136  vi svc.yaml 
+  137  kubectl create -f svc.yaml 
+  138  vi svc.yaml 
+  139  kubectl create -f svc.yaml 
+  140  kubectl get svc
+  141  vi svc.yaml 
+  142  kubectl get pods
+  143  kubectl get nodes
+  144  kubectl get pods -o wide
+  145  kubectl delete -f .
+  146  cp pod.yaml nodename-pod.yaml
+  147  vi pod.yaml 
+  148  kubectl get pod
+  149  ls
+  150  kubectl get nodes
+  151  vi nodename-pod.yaml 
+  152  kubectl create -f nodename-pod.yaml 
+  153  kubectl get pod -o wide
+  154  vi nodename-pod.yaml 
+  155  kubectl delete -f nodename-pod.yaml 
+  156  vi nodename-pod.yaml 
+  157  kubectl create -f nodename-pod.yaml 
+  158  kubectl get pods -o wide
+  159  kubectl delete -f nodename-pod.yaml 
+  160  kubectl get pods -o wide
+  161  kubectl get nodes
+  162  vi nodename-pod.yaml 
+  163  kubectl get nodes --show-labels 
+  164  kubectl get nodes
+  165  kubectl label nodes ip-172-20-54-252.ap-south-1.compute.internal cpu=ryzen
+  166  kubectl get nodes --show-labels 
+  167  kubectl get nodes --show-labels  | grep cpu=ryzen
+  168  kubectl get nodes
+  169  cp nodename-pod.yaml node-selector-pod.yaml
+  170  vi node-selector-pod.yaml
+  171  kubectl create -f node-selector-pod.yaml 
+  172  kubectl get pod -o wide
+  173  kubectl get nodes --show-labels  | grep cpu=ryzen
+  174  kubectl delete -f node-selector-pod.yaml 
+  175  vi node-selector-pod.yaml
+  176  kubectl get nodes
+  177  kubectl label nodes ip-172-20-54-252.ap-south-1.compute.internal cpu-
+  178  kubectl get nodes --show-labels  | grep cpu=ryzen
+  179  kubectl create -f node-selector-pod.yaml 
+  180  kubectl get pod 
+  181  vi node-selector-pod.yaml 
+  182  kubectl get pod 
+  183  kubectl label nodes ip-172-20-54-252.ap-south-1.compute.internal cpu=ryzen
+  184  kubectl get pod 
+  185  kubectl get pod -o wide
+  186  history > cmd.txt 
+  187  git add .
+  188  vi gitt.sh
+  189  chmod +x gitt.sh 
+  190  ./gitt.sh "nodename selector"
+  191  touch one.yaml
+  192  ls
+  193  cat *.yaml > one.yaml 
+  194  cat node-selector-pod.yaml nodename-pod.yaml pod.yaml svc.yaml  > one.yaml 
+  195  vi one.yaml 
+  196  aws cp one.yaml s3://newyaml2022/myapp
+  197  aws s3 cp one.yaml s3://newyaml2022/myapp
+  198  aws s3 cp one.yaml s3://newyaml2022/myapp/one.yaml
+  199  aws s3 cp cmd.txt s3://newyaml2022/myapp/cmd.txt
+  200  cd myapp/
+  201  ls
+  202  mkdir /home/ubuntu/files
+  203  vi ab.yaml
+  204  kops delete cluster --name newkube29112022.k8s.local --state=s3://newkube29112022.k8s.local --yes
+  205  cd myapp/
+  206  ls
+  207  vi kops.sh 
+  208  sh kops.sh 
+  209  kubectl get nodes
+  210  kubectl describe nodes ip-172-20-58-131.ap-south-1.compute.internal | grep "Taint"
+  211  kubectl describe nodes ip-172-20-58-131.ap-south-1.compute.internal | grep -A 2 "Taint"
+  212  kubectl describe nodes ip-172-20-58-131.ap-south-1.compute.internal 
+  213  kubectl describe nodes ip-172-20-58-131.ap-south-1.compute.internal | grep -A 2 "Taint"
+  214  kubectl get nodes
+  215  kubectl describe nodes ip-172-20-46-26.ap-south-1.compute.internal | grep -A 2 "Taint"
+  216  kubectl describe nodes ip-172-20-55-116.ap-south-1.compute.internal | grep -A 2 "Taint"
+  217  kubectl get pod -n kube-system 
+  218  kubectl edit pod etcd-manager-main-ip-172-20-58-131.ap-south-1.compute.internal -n kube-system 
+  219  kubectl describe nodes ip-172-20-58-131.ap-south-1.compute.internal | grep -A 2 "Taint"
+  220  kubectl get pod -n kube-system 
+  221  kubectl get deployment -n kube-system 
+  222  ssh ubuntu@3.110.147.66
+  223  kubectl get pod 
+  224  kubectl get pod
+  225  kubectl delete pod my-staticpod-ip-172-20-58-131.ap-south-1.compute.internal
+  226  kubectl get pod
+  227  kubectl get pod -n kube-system
+  228  kubectl get pod
+  229  ssh ubuntu@65.2.179.115
+  230  kubectl get pod
+  231  kubectl delete pod static-worker-ip-172-20-46-26.ap-south-1.compute.internal
+  232  kubectl get pod
+  233  ssh ubuntu@65.2.179.115
+  234  kubectl get pod
+  235  ssh ubuntu@3.110.147.66
+  236  kubectl get pod
+  237  kubectl describe nodes ip-172-20-58-131.ap-south-1.compute.internal | grep -A 2 "Taint"
+  238  kubectl get nodes
+  239  kubectl taint nodes ip-172-20-46-26.ap-south-1.compute.internal color=red:NoSchedule
+  240  kubectl describe nodes ip-172-20-46-26.ap-south-1.compute.internal | grep -A2 "Taint"
+  241  kubectl create deployment mydep --image=nginx --replicas=5 
+  242  kubectl get pod -o wide
+  243  kubectl delete deployments.apps mydep 
+  244  kubectl get pod -o wide
+  245  kubectl get pod 
+  246  kubectl describe nodes ip-172-20-46-26.ap-south-1.compute.internal | grep -A2 "Taint"
+  247  cd myapp/
+  248  cp nodename-pod.yaml taint-tol.yaml
+  249  vi taint-tol.yaml 
+  250  kubectl get pod
+  251  vi taint-tol.yaml 
+  252  kubectl create -f taint-tol.yaml 
+  253  vi taint-tol.yaml 
+  254  kubectl create -f taint-tol.yaml 
+  255  kubectl get pod -o wide
+  256  kubectl describe nodes ip-172-20-46-26.ap-south-1.compute.internal | grep -A2 "Taint"
+  257  kubectl delete -f taint-tol.yaml 
+  258  kubectl create -f taint-tol.yaml 
+  259  kubectl get pod -o wide
+  260  kubectl get nodes
+  261  kubectl taint nodes ip-172-20-55-116.ap-south-1.compute.internal color=green:NoSchedule
+  262  kubectl get pod
+  263  kubectl delete -f taint-tol.yaml 
+  264  kubectl create -f taint-tol.yaml 
+  265  kubectl get pod -o wide
+  266  kubectl run test1 --image=nginx
+  267  kubectl get pod -o wide
+  268  kubectl taint nodes ip-172-20-55-116.ap-south-1.compute.internal color-
+  269  kubectl get pod -o wide
+  270  kubectl taint nodes ip-172-20-46-26.ap-south-1.compute.internal color-
+  271  kubectl describe nodes ip-172-20-46-26.ap-south-1.compute.internal | grep -A2 "Taint"
+  272  kubectl describe nodes ip-172-20-55-116.ap-south-1.compute.internal | grep -A2 "Taint"
+  273  kubectl get pod
+  274  kubectl delete -f taint-tol.yaml 
+  275  kubectl get pod
+  276  kubectl get pod -o wide
+  277  kubectl create deployment mydep --image=nginx --replicas=5
+  278  kubectl get pod -o wide
+  279  kubectl taint nodes ip-172-20-46-26.ap-south-1.compute.internal color=red:NoExecute
+  280  kubectl get pod -o wide
+  281  kubectl get nodes --show-labels | grep "cpu=ryzen"
+  282  history >> cmd.txt 

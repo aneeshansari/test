@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tol-pod
+  labels:
+    app: mypod
+spec:
+  containers:
+  - image: nginx:latest
+    name: con1
+    ports:
+    - containerPort: 80
+  - name: con2
+    image: tomcat:latest
+    ports:
+    - containerPort: 8080
+  tolerations:
+  - key: color
+    operator: Equal
+    value: red
+    effect: NoSchedule
