@@ -44,5 +44,65 @@ kubectl get pod -o wide
 
 
 
+** Deployment **
+# Create Deployment 
+kubectl create -f deployment.yaml
+
+kubectl get deployments.apps
+
+## to see deployment's container image name
+kubectl get deployments.apps -o wide
+
+
+## to see replicaset created by deployment
+kubectl get rs
+
+## to see detailed information of deployment describe it 
+kubectl describe deployments.apps mydep
+
+
+## to rolling update / update contianer image 
+#kubectl set image deployments.apps mydep con1=httpd --record
+
+## annotate history of rolling update 
+kubectl annotate deployments.apps mydep kubernetes.io/change-cause="deployed myserver121-latest image"
+
+##   u can use same command to update deployment by changing image name, than update annonation again"
+#kubectl set image deployments.apps mydep con1=966145/myserver121:latest 
+
+kubectl annotate deployments.apps mydep kubernetes.io/change-cause="deployed myserver121-latest image"
+
+
+### see history of deployment 
+kubectl rollout history deployment mydep
+
+#detailed history of deployment 
+ kubectl rollout history deployment mydep --revision=3
+
+
+##  roll back deployment to specific deployment 
+ kubectl rollout undo deployment mydep --to-revision=2
+
+## to see deployment's detail
+kubectl get deployments.apps -o wide
+
+# replicaset is also updated check here 
+
+ kubectl get rs
+
+## replicaset's pod are running"
+kubectl get pod
+
+
+### Create HPA using imperative way 
+ kubectl autoscale deployment mydep --min=3 --max=10 --cpu-percent 70 --dry-run=client -o yaml
+
+## add yaml to deployment 
+ kubectl autoscale deployment mydep --min=3 --max=10 --cpu-percent 70
+
+## see hpa's autoscaler's information 
+kubectl get hpa
+
+
 
 
