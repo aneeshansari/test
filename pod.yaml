@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: newpod
   labels:
-    app: mypod
+    app: newapp
 spec:
   containers:
   - image: nginx:latest

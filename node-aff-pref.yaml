@@ -6,7 +6,7 @@ metadata:
     app: mypod
 spec:
   containers:
-  - image: nginx:latest
+  - image: httpd:latest
     name: con1
     ports:
     - containerPort: 80
