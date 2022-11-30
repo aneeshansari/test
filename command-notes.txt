@@ -33,12 +33,16 @@ kubectl get pod -o wide
 replicaSet commands:
 
 
-#list replicationcontroller
-kubectl get rc/replicationcontroller
+#list replicaset
+kubectl get rs / replicaSet
 
 #scale in/out replicas of replicationcontroller
-kubectl scale replicationcontroller myrc --replicas=3
+kubectl scale replicaset myrs --replicas=3
 
 #List pods  , -o wide option to see in which node pod is running
 kubectl get pod -o wide
+
+
+
+
 
