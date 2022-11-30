@@ -1,0 +1,13 @@
+
+replicationcontroller commands:
+##create replication controller
+kubectl create -f replication-ctrl.yaml
+
+#list replicationcontroller
+kubectl get rc/replicationcontroller
+
+#scale in/out replicas of replicationcontroller
+kubectl scale replicationcontroller myrc --replicas=3
+
+
+
