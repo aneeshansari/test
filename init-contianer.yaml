@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydep
+spec:
+   replicas: 3
+   selector:
+     matchLabels:
+       app: myapp
+   template:
+     metadata:
+       labels:
+          app: myapp
+     spec:
+        initContainers:
+        - name: icon
+          image: ubuntu:latest
+          volumeMounts:
+          - name: myvol
+            mountPath: /data
+          command: ["/bin/bash","-c","echo '<h1>Hello From initCotainrs file</h1>' > /data/index.html"]
+        containers:
+        - name: con1
+          image: nginx:latest
+          ports:
+          - containerPort: 80
+          volumeMounts:
+          - name: myvol
+            mountPath: /usr/share/nginx/html
+        volumes:
+        - name: myvol
+          emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress-svc
+spec:
+  ports:
+  - port: 80
+    name: con1
+    nodePort: 30123
+  selector:
+    app: myapp
+  type: NodePort
+
+

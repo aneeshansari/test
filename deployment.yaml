@@ -17,17 +17,27 @@ spec:
           image: nginx:latest
           ports:
           - containerPort: 80
-
 ---
-apiVersion: autoscaling/v1
-kind: HorizontalPodAutoscaler
+apiVersion: v1
+kind: Service
 metadata:
-  name: mydep-hpa
+  name: mydep-svc
 spec:
-  maxReplicas: 10
-  minReplicas: 3
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: mydep
-  targetCPUUtilizationPercentage: 70
+  ports:
+  - port: 80
+    name: con1
+  selector:
+    app: myapp
+ #---
+ #apiVersion: autoscaling/v1
+ #kind: HorizontalPodAutoscaler
+ #metadata:
+ #  name: mydep-hpa
+ #spec:
+ #  maxReplicas: 10
+ #  minReplicas: 3
+ #  scaleTargetRef:
+ #    apiVersion: apps/v1
+ #    kind: Deployment
+ #    name: mydep
+ #  targetCPUUtilizationPercentage: 70
