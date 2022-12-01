@@ -108,6 +108,11 @@ kubectl get hpa
 apt update && apt install dnsutils -y 
 install nslookup in wordpress container and see FQDN
 nslookup [clusterIP-service-name-here]
- 
+
+#  Create config map using files
+kubectl create configmap myindex --from-file inde.html --dry-run=client -o yaml > cmapindex.html
+
+# Create config map for environment variable 
+kubectl create configmap mywordpress --from-literal WORDPRESS_DB_HOST=mydb-svc --from-literal WORDPRESS_DB_USER=root --from-literal WORDPRESS_DB_PASSWORD=test123 --from-literal=WORDPRESS_DB_NAME=testdb --from-literal WORDPRESS_TABLE_PREFIX=wp_ --dry-run=client -o yaml 
 
 
