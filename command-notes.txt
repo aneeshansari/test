@@ -104,5 +104,10 @@ kubectl get pod
 kubectl get hpa
 
 
+**  install nslookup in container 
+apt update && apt install dnsutils -y 
+install nslookup in wordpress container and see FQDN
+nslookup [clusterIP-service-name-here]
+ 
 
 
