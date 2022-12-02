@@ -113,6 +113,13 @@ nslookup [clusterIP-service-name-here]
 kubectl create configmap myindex --from-file inde.html --dry-run=client -o yaml > cmapindex.html
 
 # Create config map for environment variable 
-kubectl create configmap mywordpress --from-literal WORDPRESS_DB_HOST=mydb-svc --from-literal WORDPRESS_DB_USER=root --from-literal WORDPRESS_DB_PASSWORD=test123 --from-literal=WORDPRESS_DB_NAME=testdb --from-literal WORDPRESS_TABLE_PREFIX=wp_ --dry-run=client -o yaml 
+kubectl create configmap mywordpress --from-literal WORDPRESS_DB_HOST=mydb-svc --from-literal WORDPRESS_DB_USER=root --from-literal WORDPRESS_DB_PASSWORD=test123 --from-literal=WORDPRESS_DB_NAME=testdb --from-literal WORDPRESS_TABLE_PREFIX=wp_ --dry-run=client -o yaml
+
+
+
+* Change namespace default to devops 
+kubectl config set-context $(kubectl config current-context) --namespace default
+
+ 
 
 
