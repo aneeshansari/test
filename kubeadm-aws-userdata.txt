@@ -3,5 +3,4 @@ sudo su -
 apt update && apt install wget -y
 
 wget files.cloudthat.training/devops/kubernetes-ckad/kubeadm-script-v1.20.sh
-sh wget files.cloudthat.training/devops/kubernetes-ckad/kubeadm-script-v1.20.sh
-
+sh kubeadm-script-v1.20.sh
