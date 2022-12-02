@@ -1,0 +1,195 @@
+kubectl auth can-i create deployment
+
+kubectl auth can-i create deployment --as user-name
+
+kubectl auth can-i create deployment --as user-name --namespace devops
+
+###############################################
+                      RABC                    #
+###############################################
+
+adduser aneesh 
+
+cd /home/aneesh
+
+•	Create a private key:
+openssl genrsa -out aneesh.key 2048
+
+•	Create a certificate signing request (CSR). CN is the username and O the group. We can set permissions by group, which can simplify management if we have, for example, multiple users with the same authorizations.
+	# Without Group
+openssl req -new -key aneesh.key -out aneesh.csr -subj "/CN=aneesh"
+
+
+Sign the CSR with the Kubernetes CA. We have to use the CA cert and key which are normally in /etc/kubernetes/pki/. Our certificate will be valid for 500 days.
+
+openssl x509 -req -in aneesh.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out aneesh.crt -days 500
+
+
+
+•	Create a “.certs” directory where we are going to store the user public and private key.
+
+mkdir .certs && mv aneesh.crt aneesh.key .certs
+•	Create the user inside Kubernetes.
+kubectl config set-credentials aneesh --client-certificate=/home/aneesh/.certs/aneesh.crt --client-key=/home/aneesh/.certs/aneesh.key
+
+context contains a Kubernetes cluster, a user, and a namespace
+
+•	Create a context for the user.
+kubectl config set-context aneesh-context --cluster=kubernetes --user=aneesh
+####################
+Change Context
+ kubectl use-context user@cluster
+kubectl config -h
+###################
+•	root@master:/home/aneesh# kubectl config  get-contexts
+
+•	Edit the user config file. The config file has the information needed for the authentication to the cluster. You can use the cluster admin config which is normally in /etc/kubernetes. The “certificate-authority-data” and “server” variables have to be as in the cluster admin config.
+
+
+#############  DELETE CONTEXT######################
+kubectl config unset users.aneesh
+kubectl config unset contexts.aws_cluster1-kubernetes
+kubectl config unset clusters.foobar-baz
+
+#######################################################
+
+
+
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJd01Ea3hNVEV3TWpReU1sb1hEVE13TURrd09URXdNalF5TWxvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBT1RqCjh5SGxBM1BueU4rZEI2d2w4NHpFSXNuWWFrTjBZMmdtY0JVSG5ZeHY2RUNnRGZKc3Q3MmJOZ0xZcmxwQ01EUFkKTGR5OFFMNE43REpFUmNDUEpsQ01FTmR2UmRYc2dJejFNMXF6cEhIbHdsZG4xYlhFamJnL3hRMTlhaW1RZkcyeApoRW5kRWNUQTVFWjByeEhTL01MSk1lRm5qd2pYWkF5RmlRVlIzcnBoY3lmc2poUWtwbjI2aUV4bVVwM28rSGliCjZJa1Z5VEM3YlBQVG5XZWpzeUREOEVUM0lOd3Z6dVFPT0hGVEJSM0sxWThWRlU3dnBTQlRIRlBmN0xnd1JjODMKNkVDWHRmMytiamR2aEtRQStWMm9IUzZ5NTlDcVdhZXFLUVhQSFZKNm9jcEFjVnBxT0Y3cmhnRi9VSGpZZGVUTgpNRVZGbjFMQThRcm5HeFdwVlpjQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZKRitaOElNdVVzRFcxaVNXQlFrTktaTkt5anZNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFCVGgzd3hMMGdoWk9Ga1djRUhmUkdVQWtza2tpSG1wMlZ5UnBNWGxqTnZqSXpjNldjMAo2WnRIbCt2bXFZL01xVUpSUG5IN0hjTjBQNzcyb1RLTlRMbkF1OUlOd1NFcmhWY0Y3SHc3RXVkL3NhcjdCWVlFCkVUU1J4dVFGTTg1dWRTRU1iMXFJVVR0WHY5RGpGSFV3dGdlczEzWHh3NGR4cXVBWlFzRWV4ODF5Yzh3NUNSRDcKSXQ1UjZtSWR0enhQVG9kNGEveXk5bUZzRjAvamVjaVkwcTVmOVVBR0lWSE0xa3dwdkwzN0txcEV5cklVUTBEbApEZGEwTklNNW1iN3hLZi92V0VkUjNIN0NxT2hYM1ZhcmRNK0haSHRRTkVDVm9HYmlteVhjaGFqUU9mT0lIcm5aCjQvZDZSVEp4dWxnR0diSjg2WjhySjI1QzBzKyt5K1BPOVZ0WgotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    server: https://192.168.1.210:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    namespace: myk8s
+    user: aneesh
+  name: aneesh-context
+current-context: aneesh-context
+kind: Config
+preferences: {}
+users:
+- name: aneesh
+  user:
+    client-certificate: /home/aneesh/.certs/aneesh.crt
+    client-key: /home/aneesh/.certs/aneesh.key
+
+
+
+Then we need to copy the config above in the .kube directory.
+
+mkdir .kube && vi .kube/config
+•	Now we need to grant all the created files and directories to the user:
+
+Then we need to copy the config above in the .kube directory.
+mkdir .kube && vi .kube/config
+•	Now we need to grant all the created files and directories to the user:
+   chown -R aneesh:aneesh /home/aneesh/
+   
+   
+   
+   
+   Now we have our users, we can create the two namespaces:
+kubectl create namespace my-project-dev
+kubectl create namespace my-project-prod
+
+
+############   getting same error ? 
+kubectl get nodes
+Error from server (Forbidden): nodes is forbidden: User "jean" cannot list resource "nodes" in API group "" at the cluster scope
+kubectl get pods -n default
+Error from server (Forbidden): pods is forbidden: User "jean" cannot list resource "pods" in API group "" in the namespace "default"
+kubectl get pods -n my-project-prod
+Error from server (Forbidden): pods is forbidden: User "jean" cannot list resource "pods" in API group "" in the namespace "my-project-prod"
+
+
+Create Role and ClusterRole
+We will use the default ClusterRole available. However we will show you how to create specific Role/ClusterRole. A Role/ClusterRole are just a list of verbs (actions) permitted on specific resources and namespaces. Here is an example of a YAML file:
+
+
+@@@@  ClusterRole.yaml
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: aneesh-role
+  namespace: myk8s
+rules:
+  - apiGroups: [ apps ]
+    resources: [ deployments ]
+    verbs: [ get, list ]
+---
+
+ClusterRole: 
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: aneesh-role
+rules:
+  - apiGroups: [ apps ]
+    resources: [ deployments ]
+    verbs: [ get, list ]
+
+##### role binding.yaml
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: aneesh
+  namespace: myk8s
+subjects:
+- kind: User
+  name: aneesh
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: edit
+  apiGroup: rbac.authorization.k8s.io
+---
+
+
+
+kubectl get pods -n myk8s  
+
+
+kubectl config set-context aneesh-context --cluster=kubernetes --user=aneesh
+
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+
+
+
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: devops-role
+  namespace: devops
+rules:
+  - apiGroups: [ "*" ]
+    resources: [ "pods/exec","pods","deployments" ]
+    verbs: [ "get", "list","edit","create","update","delete"  ]
+
+##### role binding.yaml
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: devops-rolebinding
+  namespace: devops
+subjects:
+- kind: User
+  name: aneesh
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: devops-role
+  apiGroup: rbac.authorization.k8s.io
+
+
+
+
+
+
