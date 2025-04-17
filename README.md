@@ -1,5 +1,9 @@
-# 🚨 One Idiot Copied My Video on YouTube Without My Permission
+# 🚨 One Idiot Copied My Video on his YouTube channel Without My Permission
+
+
 # if you are here by seeing his youtube channel beaware ........ 
+
+
 # He is running fake training institute / dont pay him any money 
 
 
